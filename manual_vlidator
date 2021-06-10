@@ -1,0 +1,94 @@
+import 'dart:html';
+
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: "i am materialapp",
+      home: HomePage(),
+    );
+  }
+}
+
+// ignore: must_be_immutable
+class HomePage extends StatelessWidget {
+  // const HomePage({Key? key}) : super(key: key);
+  GlobalKey<FormState> formkey = GlobalKey();
+
+  void validate() {
+    if (formkey.currentState!.validate()) {
+      print("ok");
+    } else {
+      print("madarchod form shi krr");
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("iam app bar"),
+      ),
+      body: Column(
+        children: [
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Form(
+                  autovalidateMode: AutovalidateMode.always,
+                  key: formkey,
+                  child: Column(
+                    children: [
+                      TextFormField(
+                        decoration: InputDecoration(
+                          labelText: "Email",
+                          border: OutlineInputBorder(),
+                        ),
+                        validator: (val) {
+                          if (val!.isEmpty) {
+                            return "required";
+                          } else {
+                            return null;
+                          }
+                        },
+                      ),
+                      TextFormField(
+                        decoration: InputDecoration(
+                          labelText: "Password",
+                          border: OutlineInputBorder(),
+                        ),
+                        validator: (val) {
+                          if (val!.isEmpty) {
+                            return "required";
+                          }
+                          if (val.length < 8) {
+                            return "at least 8 characters required";
+                          } else {
+                            return null;
+                          }
+                        },
+                      ),
+                      // ignore: deprecated_member_use
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        // ignore: deprecated_member_use
+                        child: RaisedButton(
+                            onPressed: validate, child: Text("login")),
+                      ),
+                    ],
+                  )),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
