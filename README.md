@@ -2,5 +2,4 @@
 ## -> Grid View
 ## -> Manual Validator
 ## -> Validator Package
-## -> Dark Theme
-## -> Light Theme
+## -> Dark Theme & Light Theme
